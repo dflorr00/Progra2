@@ -2,6 +2,7 @@ package Codigo;
 
 public class Casilla {
 	
+	//Atributos
 	private char content;
 	private int x;
 	private int y;
