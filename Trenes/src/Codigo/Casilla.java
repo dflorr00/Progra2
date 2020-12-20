@@ -15,6 +15,10 @@ public class Casilla {
 		return content;
 	}
 	
+	public void setContent(char c) {
+		this.content = c;
+	}
+	
 	public int getY() {
 		return x;
 	}
