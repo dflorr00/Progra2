@@ -27,9 +27,9 @@ public class Main {
 			tablero.ocupar(c,l,x,y);
 		}
 		
+		tablero.movimiento();
 		System.out.println(tablero.toString());
 		
 	}
-	
-	
+		
 }

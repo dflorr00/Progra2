@@ -1,12 +1,11 @@
 package Codigo;
 
-public class Casilla {
+public class Casilla{
 	
 	//Atributos
 	private char content;
-	private int x;
-	private int y;
 	
+	//Constructor
 	public Casilla() {
 		content = '.';
 	}
@@ -17,14 +16,7 @@ public class Casilla {
 	
 	public void setContent(char c) {
 		this.content = c;
-	}
-	
-	public int getY() {
-		return x;
-	}
-	
-	public int getX() {
-		return y;
+		
 	}
 	
 	@Override
