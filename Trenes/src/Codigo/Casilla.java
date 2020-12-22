@@ -3,21 +3,15 @@ package Codigo;
 public class Casilla{
 	
 	//Atributos
-	private char content;
+	public char content;
+	public boolean eliminar;
 	
 	//Constructor
 	public Casilla() {
 		content = '.';
+		eliminar = false;
 	}
 	
-	public char getContent() {
-		return content;
-	}
-	
-	public void setContent(char c) {
-		this.content = c;
-		
-	}
 	
 	@Override
 	public String toString() {

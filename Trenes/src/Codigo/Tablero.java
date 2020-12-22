@@ -27,28 +27,28 @@ public class Tablero {
 			case 'A': 
 				for(int i=0;i<l;i++) {
 					if((y-i)>=0) {
-						tablero[y-i][x].setContent(c);
+						tablero[y-i][x].content=c;
 					}
 				}
 				break;
 			case 'B':
 				for(int i=0;i<l;i++) {
 					if((y+i)<tam) {
-						tablero[y+i][x].setContent(c);
+						tablero[y+i][x].content=c;
 					}
 				}
 				break;
 			case 'I':
 				for(int i=0;i<l;i++) {
 					if(x+i<tam-1) {
-						tablero[y][x+i].setContent(c);
+						tablero[y][x+i].content=c;
 					}
 				}
 				break;
 			case 'D':
 				for(int i=0;i<l;i++) {
 					if((x-i)>=0) {
-						tablero[y][x-i].setContent(c);
+						tablero[y][x-i].content=c;
 					}
 				}
 				break;
@@ -58,63 +58,74 @@ public class Tablero {
 
 	//Mueve los trenes
 	public void movimiento() {
+		
 		int n=0;
-		while(n<1){
+		while(n<100){
+			
 			for(int i=0;i<tam;i++) {
+				for(int j=tam-1;j>=0;j--) {
+					char c = tablero[i][j].content;
+					switch(c) {
+					case 'B':
+						if(i<tam-1 && i>0) {
+							if(tablero[i-1][j].content == '.')tablero[i-1][j].content='B';//avanza la cabeza
+							else if(tablero[i-1][j].content!='B') tablero[i-1][j].content='X';//choque
+							if(tablero[i+1][j].content != 'B')tablero[i][j].content = '.';//Si es el ultimo se elimina
+						}else {
+							tablero[i][j].content='.'; //es un borde y la elimina
+						}
+						break;
+					case 'D':
+						if(j<tam-1 && j>0) {
+							if(tablero[i][j+1].content == '.')tablero[i][j+1].content='D';//avanza la cabeza
+							else if(tablero[i][j+1].content!='D') tablero[i][j+1].content='X';//choque
+							if(tablero[i][j-1].content != 'D')tablero[i][j].content = '.';//Si es el ultimo se elimina
+						}else {
+							tablero[i][j].content='.'; //es un borde y la elimina
+						}break;
+					}
+				
+				}
+			}
+			
+			for(int i=tam-1;i>=0;i--) {
 				for(int j=0;j<tam;j++) {
-					char c = tablero[i][j].getContent();
+					char c = tablero[i][j].content;
 					switch(c) {
 					case 'A':
 						if(i<tam-1 && i>0) {
-							if(tablero[i+1][j].getContent() == '.') {
-								tablero[i+1][j].setContent('A');//avanza la cabeza
-								i--;
-							}else if(tablero[i+1][j].getContent()!='A') tablero[i+1][j].setContent('X');//choque
+							if(tablero[i+1][j].content == '.')tablero[i+1][j].content='A';//avanza la cabeza
+							else if(tablero[i+1][j].content!='A') tablero[i+1][j].content='X';//choque
+							if(tablero[i-1][j].content != 'A')tablero[i][j].content = '.';//Si es el ultimo se elimina
 						}else {
-							tablero[i][j].setContent('.'); //es un borde y la elimina
-						}/*
-						if(tablero[i-1][j].getContent() != 'A') {
-								tablero[i][j].setContent('.');//elimina el último
-							}*/
-						break;
-					/*case 'B':
-						if(i<tam-1 && i>0) {
-							if(tablero[i+1][j].getContent() != 'B')tablero[i][j].setContent('.');
-							if(tablero[i-1][j].getContent() == 'B' || tablero[i-1][j].getContent() == '.')tablero[i-1][j].setContent('B');
-							else tablero[i-1][j].setContent('X');
-						}else {
-							tablero[i][j].setContent('.');
+							tablero[i][j].content='.'; //es un borde y la elimina
 						}
+						break;
 					case 'I':
 						if(j<tam-1 && j>0) {
-							if(tablero[i-1][j].getContent() != 'A')tablero[i][j].setContent('.');
-							if(tablero[i+1][j].getContent() == 'A' || tablero[i+1][j].getContent() == '.')tablero[i+1][j].setContent('A');
-							else tablero[i+1][j].setContent('X');
+							if(tablero[i][j-1].content == '.')tablero[i][j-1].content='I';//avanza la cabeza
+							else if(tablero[i][j-1].content!='I') tablero[i][j-1].content='X';//choque
+							if(tablero[i][j+1].content != 'I')tablero[i][j].content = '.';//Si es el ultimo se elimina
 						}else {
-							tablero[i][j].setContent('.');
-						}
-					case 'D':
-						if(j<tam-1 && j>0) {
-							if(tablero[i-1][j].getContent() != 'A')tablero[i][j].setContent('.');
-							if(tablero[i+1][j].getContent() == 'A' || tablero[i+1][j].getContent() == '.')tablero[i+1][j].setContent('A');
-							else tablero[i+1][j].setContent('X');
-						}else {
-							tablero[i][j].setContent('.');
-						}*/
+							tablero[i][j].content='.'; //es un borde y la elimina
+						}break;
 					}
+				
 				}
-				System.out.println(toString());
 			}
-			n++;
 			
+			n++;
 		}
+	}
+	public void intercambia(Casilla a, Casilla v) {
+		v.content = a.content;
 	}
 	
 	public boolean vacio() {
 		vacio = true;
 		for(int i=0;i<tam;i++) {
 			for(int j=0;j<tam;j++) {
-				if(tablero[i][j].getContent()!='.')vacio = false;
+				if(tablero[i][j].content!='.')vacio = false;
 			}
 		}
 		return vacio;
