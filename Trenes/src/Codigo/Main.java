@@ -29,7 +29,7 @@ public class Main {
 			}
 			count++;
 		}while(sc.hasNext());
-
+		
 		for(int j=0;j<count;j++) {
 			entr.get(j).movimiento();
 			System.out.println(entr.get(j).toString());
