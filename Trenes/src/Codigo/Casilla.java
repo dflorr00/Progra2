@@ -3,7 +3,7 @@ package Codigo;
 public class Casilla{
 	
 	//Atributos
-	public char content = '.';;
+	public char content = '.';
 	
 	
 	@Override

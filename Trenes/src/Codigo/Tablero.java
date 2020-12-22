@@ -26,43 +26,43 @@ public class Tablero {
 		boolean error = false;
 		switch(c) {
 			case 'A': 
-				for(int i=0;i<l-1;i++) {
+				for(int i=0;i<l;i++) {
 					if((y-i)>=0) {
 						if(tablero[y-i][x].content=='.')tablero[y-i][x].content=c;
 						else {
 							error = true;
 						}
-					}else error = true;
+					}
 				}
 				break;
 			case 'B':
-				for(int i=0;i<l-1;i++) {
+				for(int i=0;i<l;i++) {
 					if((y+i)<tam) {
 						if(tablero[y+i][x].content=='.')tablero[y+i][x].content=c;
 						else {
 							error = true;
 						}
-					}else error = true;
+					}
 				}
 				break;
 			case 'I':
-				for(int i=0;i<l-1;i++) {
+				for(int i=0;i<l;i++) {
 					if(x+i<tam-1) {
 						if(tablero[y][x+i].content=='.')tablero[y][x+i].content=c;
 						else {
 							error = true;
 						}
-					}else error = true;
+					}
 				}
 				break;
 			case 'D':
-				for(int i=0;i<l-1;i++) {
+				for(int i=0;i<l;i++) {
 					if((x-i)>=0) {
 						if(tablero[y][x-i].content=='.')tablero[y][x-i].content=c;
 						else {
 							error = true;
 						}
-					}else error = true;
+					}
 				}
 				break;
 		}	
@@ -72,7 +72,6 @@ public class Tablero {
 	//Mueve los trenes
 	public void movimiento() {
 		while(!vacio()){
-			System.out.println(toString());
 			for(int i=0;i<tam;i++) {
 				for(int j=tam-1;j>=0;j--) {
 					char c = tablero[i][j].content;

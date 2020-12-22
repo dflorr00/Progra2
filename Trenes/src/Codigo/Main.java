@@ -30,7 +30,12 @@ public class Main {
 				if(x>29 || x<0)salir = true;
 				y = sc.nextInt();
 				if(y>29 || y<0)salir = true;
-				//tb.ocupar(c,l,x,y);
+				switch(c){
+			    case 'A':if(y-(l-2)<0)salir = true;
+			    case 'B':if(y+(l-2)>30)salir = true;
+			    case 'D':if(x-(l-2)<0)salir = true;
+			    case 'I':if(x+(l-2)>30)salir = true;
+			}
 				if(tb.ocupar(c,l,x,y)==true)salir = true;
 			}
 			if(!salir) {
