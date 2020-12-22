@@ -16,26 +16,40 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int count=0;
+		boolean salir=false;
 		//Entrada del programa
 		do {
-			entr.add(new Tablero());
+			Tablero tb =new Tablero();
 			int n = sc.nextInt(); //Número de trenes
-			for(int i=0;i<n;i++) {
+			for(int i=0;i<n && !salir;i++) {
 				c = sc.next().charAt(0); //dirección
+				if(c != 'A' && c != 'B' && c != 'D' && c != 'I')salir = true;
 				l = sc.nextInt(); //Longitud
+				if(l>30 || l<1)salir = true;
 				x = sc.nextInt();
+				if(x>29 || x<0)salir = true;
 				y = sc.nextInt();
-				entr.get(count).ocupar(c,l,x,y);
+				if(y>29 || y<0)salir = true;
+				//tb.ocupar(c,l,x,y);
+				if(tb.ocupar(c,l,x,y)==true)salir = true;
 			}
-			count++;
-		}while(sc.hasNext());
+			if(!salir) {
+				entr.add(tb);
+				count ++;
+			}
+		}while(sc.hasNext() && !salir);
 		
+		//En caso de entrada erronea
+		if(salir==true) {
+			System.out.println("\n\nConjunto de trenes incorrecto.\n");
+		}
+		
+		//Salida de todos los tableros buenos
 		for(int j=0;j<count;j++) {
 			entr.get(j).movimiento();
 			System.out.println(entr.get(j).toString());
 		}
-	}
-		
+	}	
 }
 
 /*10

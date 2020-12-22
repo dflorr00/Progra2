@@ -22,46 +22,57 @@ public class Tablero {
 	}
 	
 	//Cambia el contenido de la casilla por el caracter puesto
-	public void ocupar(char c,int l,int x, int y) {
+	public boolean ocupar(char c,int l,int x, int y) {
+		boolean error = false;
 		switch(c) {
 			case 'A': 
-				for(int i=0;i<l;i++) {
+				for(int i=0;i<l-1;i++) {
 					if((y-i)>=0) {
-						tablero[y-i][x].content=c;
-					}
+						if(tablero[y-i][x].content=='.')tablero[y-i][x].content=c;
+						else {
+							error = true;
+						}
+					}else error = true;
 				}
 				break;
 			case 'B':
-				for(int i=0;i<l;i++) {
+				for(int i=0;i<l-1;i++) {
 					if((y+i)<tam) {
-						tablero[y+i][x].content=c;
-					}
+						if(tablero[y+i][x].content=='.')tablero[y+i][x].content=c;
+						else {
+							error = true;
+						}
+					}else error = true;
 				}
 				break;
 			case 'I':
-				for(int i=0;i<l;i++) {
+				for(int i=0;i<l-1;i++) {
 					if(x+i<tam-1) {
-						tablero[y][x+i].content=c;
-					}
+						if(tablero[y][x+i].content=='.')tablero[y][x+i].content=c;
+						else {
+							error = true;
+						}
+					}else error = true;
 				}
 				break;
 			case 'D':
-				for(int i=0;i<l;i++) {
+				for(int i=0;i<l-1;i++) {
 					if((x-i)>=0) {
-						tablero[y][x-i].content=c;
-					}
+						if(tablero[y][x-i].content=='.')tablero[y][x-i].content=c;
+						else {
+							error = true;
+						}
+					}else error = true;
 				}
 				break;
-			default: System.out.println("No es una dirección válida");
 		}	
+		return error;
 	}
 
 	//Mueve los trenes
 	public void movimiento() {
-		
-		int n=0;
-		while(n<100){
-			
+		while(!vacio()){
+			System.out.println(toString());
 			for(int i=0;i<tam;i++) {
 				for(int j=tam-1;j>=0;j--) {
 					char c = tablero[i][j].content;
@@ -113,19 +124,15 @@ public class Tablero {
 				
 				}
 			}
-			
-			n++;
 		}
 	}
-	public void intercambia(Casilla a, Casilla v) {
-		v.content = a.content;
-	}
-	
+
+	//Comprueba si el tablero tiene trenes
 	public boolean vacio() {
 		vacio = true;
 		for(int i=0;i<tam;i++) {
 			for(int j=0;j<tam;j++) {
-				if(tablero[i][j].content!='.')vacio = false;
+				if(tablero[i][j].content!='.' && tablero[i][j].content!='X' )vacio = false;
 			}
 		}
 		return vacio;

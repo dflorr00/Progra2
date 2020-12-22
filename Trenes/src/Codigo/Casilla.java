@@ -3,14 +3,7 @@ package Codigo;
 public class Casilla{
 	
 	//Atributos
-	public char content;
-	public boolean eliminar;
-	
-	//Constructor
-	public Casilla() {
-		content = '.';
-		eliminar = false;
-	}
+	public char content = '.';;
 	
 	
 	@Override
